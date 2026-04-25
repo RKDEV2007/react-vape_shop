@@ -1,0 +1,17 @@
+h2,h3,h4,h5,h6 {
+  font-weight: 600;
+  color: #ffffff;
+  font-family: inherit;
+}
+
+p {
+  font-size: 16px;
+  color: #ffffff;
+  font-family: inherit;
+}
+
+button {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: inherit;
+}
