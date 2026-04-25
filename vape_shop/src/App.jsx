@@ -3,11 +3,11 @@ import BorderGlow from './BorderGlow';
 function App() {
   const navItems = ['Каталог', 'Одноразки', 'Жидкости', 'Аксессуары', 'Контакты'];
   const products = [
-    { category: 'Одноразка', name: 'WAKA SoPro PA10000', details: 'Вкус: Berry Ice • 20 мг', price: '1 390 ₽' },
-    { category: 'Одноразка', name: 'WAKA Smash 6000', details: 'Вкус: Mango Peach • 20 мг', price: '1 090 ₽' },
-    { category: 'Pod-система', name: 'Smoant Pasito 3', details: 'Мощность: до 50W • Картридж 3 мл', price: '3 990 ₽' },
-    { category: 'Жидкость', name: 'Chaser Salt Grape Soda 30 мл', details: 'Крепость: 20 мг • Соотношение 50/50', price: '790 ₽' },
-    { category: 'Аксессуар', name: 'Smoant хлопок (веревка)', details: 'Для намотки и обслуживания', price: '350 ₽' },
+    { category: 'Одноразка', name: 'WAKA SoPro PA10000', details: 'Вкус: Berry Ice • 20 мг', price: '1 390 ₽', image: '/assets/waka-sopro-pa10000.jpg' },
+    { category: 'Одноразка', name: 'WAKA Smash 6000', details: 'Вкус: Mango Peach • 20 мг', price: '1 090 ₽', image: '/assets/waka-smash-6000.jpg' },
+    { category: 'Pod-система', name: 'Smoant Pasito 3', details: 'Мощность: до 50W • Картридж 3 мл', price: '3 990 ₽', image: '/assets/smoant-pasito-3.jpg' },
+    { category: 'Жидкость', name: 'Chaser Salt Grape Soda 30 мл', details: 'Крепость: 20 мг • Соотношение 50/50', price: '790 ₽', image: '/assets/chaser-grape-soda-30ml.jpg' },
+    { category: 'Аксессуар', name: 'Smoant хлопок (веревка)', details: 'Для намотки и обслуживания', price: '350 ₽', image: '/assets/smoant-cotton-rope.jpg' },
   ];
 
   return (
@@ -37,7 +37,11 @@ function App() {
             colors={['#a855f7', '#d946ef', '#f472b6']}
           >
             <article className="vape-slot">
-              <div className="vape-photo-slot" aria-label={`Место для фото: ${product.name}`} />
+              <img
+                className="vape-photo-slot"
+                src={product.image}
+                alt={product.name}
+              />
               <span className="vape-category">{product.category}</span>
               <h3 className="vape-name">{product.name}</h3>
               <p className="vape-details">{product.details}</p>

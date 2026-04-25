@@ -73,6 +73,7 @@ button {
 .vape-photo-slot {
   height: 120px;
   width: 100%;
+  object-fit: contain;
   border-radius: 12px;
   border: 1px dashed rgb(255 255 255 / 26%);
   background:
