@@ -22,14 +22,60 @@ button {
 }
 
 .app {
+  --content-max: 1680px;
+  --app-pad-x: clamp(16px, 4vw, 40px);
   background-color: #120F17;
   min-height: 100vh;
-  padding: 24px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 24px var(--app-pad-x) 0;
+  box-sizing: border-box;
+}
+
+.app-main {
+  flex: 1 1 auto;
+  padding-bottom: clamp(24px, 4vw, 40px);
+  min-height: 0;
+}
+
+.site-header {
+  margin-bottom: 8px;
+}
+
+.site-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 20px;
+  margin-bottom: 14px;
+}
+
+.site-logo {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgb(244 114 182 / 95%);
+  border: 1px solid rgb(255 255 255 / 18%);
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgb(18 15 23 / 90%);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.site-logo:hover {
+  border-color: rgb(216 70 239 / 65%);
+  box-shadow: 0 0 16px rgb(168 85 247 / 28%);
 }
 
 .app-title {
   text-align: center;
-  margin-bottom: 18px;
+  margin: 0;
+  font-size: 1.5rem;
+  color: #ffffff;
 }
 
 .nav-bar {
@@ -54,31 +100,325 @@ button {
   box-shadow: 0 0 18px rgb(168 85 247 / 35%);
 }
 
+.nav-button--active {
+  border-color: rgb(168 85 247 / 85%);
+  box-shadow: 0 0 20px rgb(168 85 247 / 40%);
+}
+
+.catalog-main {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.catalog-intro {
+  text-align: center;
+  margin: 0 0 20px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.catalog-empty {
+  text-align: center;
+  margin-top: 28px;
+  opacity: 0.8;
+}
+
+.vape-card-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 18px;
+}
+
+.vape-card-link:focus-visible {
+  outline: 2px solid rgb(168 85 247 / 85%);
+  outline-offset: 3px;
+}
+
+/* Узкий экран: одна колонка, карточка ограничена по ширине (не на весь viewport) */
 .vape-grid {
-  width: min(1100px, 100%);
+  width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 14px;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: clamp(14px, 2vw, 20px);
+}
+
+.vape-grid .vape-card-link {
+  max-width: 320px;
+}
+
+@media (min-width: 400px) {
+  .vape-grid {
+    grid-template-columns: repeat(auto-fill, 260px);
+    justify-content: start;
+    justify-items: stretch;
+  }
+
+  .vape-grid .vape-card-link {
+    max-width: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .vape-grid {
+    grid-template-columns: repeat(auto-fill, 272px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .vape-grid {
+    grid-template-columns: repeat(auto-fill, 288px);
+  }
 }
 
 .vape-slot {
   display: flex;
   flex-direction: column;
-  height: 320px;
+  min-height: 0;
   width: 100%;
-  padding: 14px;
+  padding: 14px 16px 16px;
+  box-sizing: border-box;
 }
 
-.vape-photo-slot {
-  height: 120px;
+.vape-photo-stack {
+  position: relative;
+  flex-shrink: 0;
+  height: 168px;
   width: 100%;
-  object-fit: contain;
-  border-radius: 12px;
-  border: 1px dashed rgb(255 255 255 / 26%);
-  background:
-    linear-gradient(135deg, rgb(168 85 247 / 12%), rgb(217 70 239 / 10%));
   margin-bottom: 10px;
+  border-radius: 12px;
+  border: 1px dashed rgb(255 255 255 / 22%);
+  background: linear-gradient(135deg, rgb(168 85 247 / 12%), rgb(217 70 239 / 10%));
+  overflow: hidden;
+}
+
+@media (min-width: 480px) {
+  .vape-photo-stack {
+    height: 180px;
+  }
+}
+
+@media (min-width: 768px) {
+  .vape-photo-stack {
+    height: 192px;
+  }
+}
+
+/* Фото в карточке каталога: без растягивания, целиком в рамке */
+.vape-photo-stack .card-image {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.vape-photo-stack .stack-container {
+  touch-action: pan-y;
+}
+
+.product-page {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding-bottom: 32px;
+}
+
+.back-link {
+  margin-bottom: 18px;
+  padding: 8px 14px;
+  font-size: 14px;
+  background: rgb(18 15 23 / 90%);
+}
+
+.product-layout {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 840px) {
+  .product-layout {
+    grid-template-columns: minmax(320px, 1.25fr) minmax(280px, 420px);
+    align-items: start;
+  }
+}
+
+@media (min-width: 1200px) {
+  .product-layout {
+    grid-template-columns: minmax(400px, 1.35fr) minmax(300px, 440px);
+    gap: clamp(28px, 4vw, 48px);
+  }
+}
+
+.product-hero-stack {
+  position: relative;
+  height: 320px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 16px;
+  border: 1px solid rgb(255 255 255 / 14%);
+  background: linear-gradient(160deg, rgb(168 85 247 / 10%), rgb(18 15 23 / 95%));
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .product-hero-stack {
+    height: 400px;
+    max-width: 440px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .product-hero-stack {
+    height: 440px;
+    max-width: 480px;
+  }
+}
+
+.product-hero-stack .card-image {
+  object-fit: contain;
+  object-position: center;
+}
+
+.product-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-gallery-strip {
+  max-width: min(640px, 100%);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.product-gallery-title {
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(244 114 182 / 88%);
+  margin: 0 0 10px;
+}
+
+.product-gallery-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.product-gallery-thumb {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  background: rgb(255 255 255 / 6%);
+  border-radius: 10px;
+  border: 1px solid rgb(255 255 255 / 18%);
+}
+
+.product-panel {
+  padding: 8px 4px;
+}
+
+.product-title {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  margin: 10px 0 12px;
+  line-height: 1.25;
+}
+
+.product-details {
+  margin-top: 0;
+}
+
+.product-price {
+  margin-top: 20px;
+  font-size: 1.35rem;
+}
+
+.product-to-catalog {
+  display: inline-block;
+  margin-top: 22px;
+  font-size: 15px;
+  color: rgb(56 189 248 / 95%);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.product-to-catalog:hover {
+  color: rgb(125 211 252 / 100%);
+}
+
+.site-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  margin-left: calc(-1 * var(--app-pad-x));
+  margin-right: calc(-1 * var(--app-pad-x));
+  width: auto;
+  max-width: none;
+  padding: clamp(32px, 5vw, 48px) max(var(--app-pad-x), env(safe-area-inset-right, 0px))
+    max(24px, env(safe-area-inset-bottom, 0px)) max(var(--app-pad-x), env(safe-area-inset-left, 0px));
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  background: linear-gradient(180deg, rgb(10 8 14 / 40%), rgb(8 6 12 / 92%));
+  box-sizing: border-box;
+}
+
+.site-footer-grid {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(24px, 3vw, 40px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  padding: 0;
+}
+
+.site-footer-heading {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(244 114 182 / 85%);
+  margin: 0 0 12px;
+}
+
+.site-footer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgb(255 255 255 / 88%);
+}
+
+.site-footer-list a {
+  color: rgb(56 189 248 / 92%);
+  text-decoration: none;
+}
+
+.site-footer-list a:hover {
+  text-decoration: underline;
+}
+
+.site-footer-note {
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.78;
+  margin: 0;
+}
+
+.site-footer-bottom {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: clamp(24px, 4vw, 32px) auto 0;
+  padding: 16px 0 0;
+  border-top: 1px solid rgb(255 255 255 / 8%);
+  font-size: 13px;
+  opacity: 0.65;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .vape-category {
@@ -105,4 +445,11 @@ button {
   margin-top: 16px;
   font-size: 18px;
   color: rgb(56 189 248 / 92%);
+}
+
+.site-footer-bottom-text {
+  color: rgb(244 114 182 / 90%);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
